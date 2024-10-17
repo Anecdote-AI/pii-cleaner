@@ -1,0 +1,17 @@
+version: '3'
+services:
+  presidio-analyzer:
+    image: mcr.microsoft.com/presidio-analyzer
+    ports:
+      - "5001:5001"
+  presidio-anonymizer:
+    image: mcr.microsoft.com/presidio-anonymizer
+    ports:
+      - "5002:5002"
+  pii-app:
+    build: .
+    ports:
+      - "8501:8501"
+    depends_on:
+      - presidio-analyzer
+      - presidio-anonymizer
